@@ -1,0 +1,37 @@
+{
+  "name": "<NAME>",
+  "version": "0.0.1",
+  "description": "<DESCRIPTION>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./x": "./dist/x/index.mjs"
+  },
+  "typesVersions": {
+    "*": {
+      "x": ["dist/x/index.d.ts"]
+    }
+  },
+  "repository": "<REPOSITORY>",
+  "bugs": "<REPOSITORY>/issues",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "keywords": [],
+  "scripts": {
+    "audit": "npm audit --production --audit-level=high",
+    "build": "tsc",
+    "lint:eslint": "eslint --cache --fix --ignore-path .gitignore .",
+    "lint:prettier": "prettier --write --ignore-path .gitignore '**/*.{css,html,json,md,mdx,yml}'",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "prepare": "git config --local core.hooksPath .githooks/",
+    "prepublishOnly": "npm run audit && npm ci --ignore-scripts && npm run build && npm run test",
+    "start": "npm run build -- --watch",
+    "test": "jest --config .jestrc.js"
+  }
+}
